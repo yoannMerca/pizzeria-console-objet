@@ -54,6 +54,7 @@ lib/form/base/*
 lib/model/map/*
 lib/model/om/*
 
+doc/*
 # OS
 .DS_Store
 
@@ -69,7 +70,7 @@ target/
 .settings/
 .svn/
 bin/
-doc/
+
 # Intellij
 *.ipr
 *.iml

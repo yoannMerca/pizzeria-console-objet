@@ -109,19 +109,18 @@ package classe;
 		public static Pizza[] deletePizza(String code,Pizza[] pizzas) {
 			
 			Pizza[] newPizzas = new Pizza[pizzas.length-1];
- 			
-			for(int i=0;i<pizzas.length;i++) {
-				
-				if(!pizzas[i].getCode().equals(code)) {
-					newPizzas[i-1] = pizzas[i]; 
-				}
-			}
-		
+ 			int i =0;
 			
+			for (Pizza pizza : pizzas) {
+				
+				if(!pizza.getCode().equals(code)) {
+						newPizzas[i] = pizza; 
+						i++;
+					}
+			
+			}
 			return newPizzas;
 		}
-		
-		
 		public static Pizza[] updateNewPizza(String oldCode ,String code, Pizza[] pizzas,String name, Double price) {
 			for (Pizza pizza : pizzas) {
 				

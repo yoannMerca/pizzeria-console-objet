@@ -44,7 +44,7 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
-
+doc/
 config/databases.yml
 cache/*
 log/*
@@ -69,6 +69,7 @@ target/
 .settings/
 .svn/
 bin/
+doc/
 # Intellij
 *.ipr
 *.iml

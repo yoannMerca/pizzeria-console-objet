@@ -6,11 +6,11 @@ package classe;
 			Désignation : MARGARITA
 			Prix : 9,20 €
 		*/
-		
+		private int idPizza;
 		private String code = null;
 		private String designation = null;
 		private Double price = null;
-	
+		static int nbr =0;
 		
 		
 		/**
@@ -20,6 +20,7 @@ package classe;
 		 * @param price prix de la pizza
 		 */
 		public Pizza(String code, String designation, Double price) {
+			this.idPizza = nbr++;
 			this.code = code;
 			this.designation = designation;
 			this.price = price;
@@ -66,7 +67,9 @@ package classe;
 		public void setPrice(Double price) {
 			this.price = price;
 		}
-		
+		public int getIdPizza() {
+			return idPizza;
+		}
 		/**
 		 * 
 		 * @return methode pour afficher le menu de l'application
@@ -79,6 +82,57 @@ package classe;
 					"3. Mettre à jour une pizza\r\n" + 
 					"4. Supprimer une pizza\r\n" + 
 					"99. Sortir";
+		}
+		public String toString() {
+	
+			return this.code +" -> "+ this.designation +"("+ this.price+" €)";
+		}
+		
+		public static void displayAllPizza(Pizza[] pizzas) {
+			
+			for (Pizza pizza: pizzas) {
+				System.out.println(pizza.toString());
+				
+			}
+		}
+		public static Pizza[] addNewPizza(Pizza pizz ,Pizza[] pizzas) {
+				
+			Pizza[] newPizzas = new Pizza[pizzas.length+1];
+ 			
+			for(int i=0;i<pizzas.length;i++) {
+				newPizzas[i] = pizzas[i];
+			}	
+			newPizzas[newPizzas.length-1] = pizz;
+			
+			return newPizzas;
+		}
+		public static Pizza[] deletePizza(String code,Pizza[] pizzas) {
+			
+			Pizza[] newPizzas = new Pizza[pizzas.length-1];
+ 			
+			for(int i=0;i<pizzas.length;i++) {
+				
+				if(!pizzas[i].getCode().equals(code)) {
+					newPizzas[i-1] = pizzas[i]; 
+				}
+			}
+		
+			
+			return newPizzas;
+		}
+		
+		
+		public static Pizza[] updateNewPizza(String oldCode ,String code, Pizza[] pizzas,String name, Double price) {
+			for (Pizza pizza : pizzas) {
+				
+				if(pizza.getCode().equals(oldCode)) {
+					pizza.setCode(code);
+					pizza.setDesignation(name);
+					pizza.setPrice(price);
+				};
+			}
+			
+			return pizzas;
 		}
 		
 }

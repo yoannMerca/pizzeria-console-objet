@@ -45,6 +45,14 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+config/databases.yml
+cache/*
+log/*
+data/sql/*
+lib/filter/base/*
+lib/form/base/*
+lib/model/map/*
+lib/model/om/*
 
 # OS
 .DS_Store
@@ -54,3 +62,21 @@ nb-configuration.xml
 release.properties
 pom.xml.releaseBackup
 pom.xml.tag
+
+target/
+.project
+.classpath
+.settings/
+.svn/
+bin/
+# Intellij
+*.ipr
+*.iml
+.idea
+out/
+.DS_Store
+/bootstrap
+/dependencies.xml
+.java-version
+/javadoc-options-javadoc-resources.xml
+.checkstyle

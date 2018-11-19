@@ -15,34 +15,62 @@ package classe;
 		
 		/**
 		 * 
-		 * @param code
-		 * @param designation
-		 * @param price
+		 * @param code de la pizza (les trois premieres lettre en Maj)
+		 * @param designation Nom de la pizza
+		 * @param price prix de la pizza
 		 */
 		public Pizza(String code, String designation, Double price) {
 			this.code = code;
 			this.designation = designation;
 			this.price = price;
 		}
-		
+		/**
+		 * 
+		 * @return retourne le code de la pizza
+		 */
 		public String getCode() {
 			return code;
 		}
+		/**
+		 * 
+		 * @param code modifi le code de la pizza
+		 */
 		public void setCode(String code) {
 			this.code = code;
 		}
+		/**
+		 * 
+		 * @return retourne la designation
+		 */
 		public String getDesignation() {
 			return designation;
 		}
+		/**
+		 * 
+		 * @param designation modifi la designation
+		 */
 		public void setDesignation(String designation) {
 			this.designation = designation;
 		}
+		/**
+		 * 
+		 * @return retourne le prix de la pizza
+		 */
 		public Double getPrice() {
 			return price;
 		}
+		/**
+		 * 
+		 * @param price modification du prix
+		 */
 		public void setPrice(Double price) {
 			this.price = price;
 		}
+		
+		/**
+		 * 
+		 * @return methode pour afficher le menu de l'application
+		 */
 		
 		public static String displayMenu() {
 			return "***** Pizzeria Administration *****\r\n" + 

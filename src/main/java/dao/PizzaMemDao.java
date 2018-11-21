@@ -45,7 +45,8 @@ public class PizzaMemDao implements IPizzaDao {
 
 	public void updatePizza(String codePizza, Pizza pizza) {
 		Pizza pizz = findPizzaByCode(codePizza);
-		if(pizz!=null) {	
+		if(pizz!=null) {
+			
 			pizza = pizz;
 		}
 	}

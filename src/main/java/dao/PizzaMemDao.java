@@ -32,11 +32,9 @@ public class PizzaMemDao implements IPizzaDao {
 
 	public boolean isPizzaExists(String codePizza) {
 		boolean exist = false;
-		for (Pizza pizza : pizzas) {
-			if(pizza.getCode().equals(codePizza)) {
+			if(findPizzaByCode(codePizza)!=null) {
 				exist = true;
 			}
-		}
 		return exist;
 	}
 
@@ -46,11 +44,9 @@ public class PizzaMemDao implements IPizzaDao {
 
 
 	public void updatePizza(String codePizza, Pizza pizza) {
-		for (Pizza pizz : pizzas) {
-			if (pizz.getCode().equals(codePizza)) {
-				pizz = pizza;
-			}
-
+		Pizza pizz = findPizzaByCode(codePizza);
+		if(pizz!=null) {	
+			pizza = pizz;
 		}
 	}
 
@@ -64,14 +60,28 @@ public class PizzaMemDao implements IPizzaDao {
 		pizzas = newPizzas;
 	}
 
+//	public void deletePizza(String codePizza) {
+//		Pizza[] newPizzas = new Pizza[pizzas.length - 1];
+//		int i = 0;
+//		for (Pizza pizza : pizzas) {
+//
+//			if (!pizza.getCode().equals(codePizza)) {
+//				newPizzas[i] = pizza;
+//				i++;
+//			}
+//		}
+//		pizzas = newPizzas;
+//	}
 	public void deletePizza(String codePizza) {
 		Pizza[] newPizzas = new Pizza[pizzas.length - 1];
-		int i = 0;
-		for (Pizza pizza : pizzas) {
+		
+		int indiceProvisoire = 0;
+		
+		for(int i=0;i<pizzas.length;i++) {
 
-			if (!pizza.getCode().equals(codePizza)) {
-				newPizzas[i] = pizza;
-				i++;
+			if (!pizzas[i].getCode().equals(codePizza)) {
+				newPizzas[indiceProvisoire] = pizzas[i];
+				indiceProvisoire++;
 			}
 		}
 		pizzas = newPizzas;

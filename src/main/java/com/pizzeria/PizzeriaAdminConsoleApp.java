@@ -1,10 +1,13 @@
 package com.pizzeria;
-import java.io.*;
+
+import java.util.Collections;
 import java.util.Scanner;
 
 import classe.Pizza;
 import classe.Pizzeria;
 import dao.PizzaMemDao;
+import dao.PriceDownComparator;
+import dao.PriceUpComparator;
 
 public class PizzeriaAdminConsoleApp {
 
@@ -38,6 +41,17 @@ public class PizzeriaAdminConsoleApp {
 			 */
 			case 1:
 				System.out.println("----------------------");
+				System.out.println("tri par ordre croissant tapez 1 \n\r tri par ordre decroissant tapez 2");
+				int choice = scan.nextInt();
+				if(choice==1) {
+					//tri par ordre croissant le prix des pizzas
+					 Collections.sort(myPizzas.findAllPizzas(), new PriceUpComparator());
+					 System.out.println(myPizzas);
+				}else {
+					//tri par ordre decroissant le prix des pizzas
+					Collections.sort(myPizzas.findAllPizzas(), new PriceDownComparator());
+					 System.out.println(myPizzas);
+				}
 				System.out.println("Liste des pizzas:");
 				Pizzeria.displayAllPizza(myPizzas.findAllPizzas());
 				System.out.println(Pizza.displayMenu());

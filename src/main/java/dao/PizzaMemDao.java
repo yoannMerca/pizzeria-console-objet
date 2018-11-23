@@ -1,5 +1,10 @@
 package dao;
 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
 import classe.Pizza;
 
 public class PizzaMemDao implements IPizzaDao {
@@ -13,10 +18,17 @@ public class PizzaMemDao implements IPizzaDao {
 	String code;
 	String name;
 	Double price;
+	
+	
+	Pizza[] piz = { pizza1, pizza2, pizza3, pizza4, pizza5, pizza6, pizza7 };
+	
+	
 
-	Pizza[] pizzas = { pizza1, pizza2, pizza3, pizza4, pizza5, pizza6, pizza7 };
+	ArrayList<Pizza> pizzas = new ArrayList<Pizza>(Arrays.asList(piz));
+	
 
-	public Pizza[] findAllPizzas() {
+	
+	public ArrayList<Pizza> findAllPizzas() {
 		return pizzas;
 	}
 
@@ -38,27 +50,17 @@ public class PizzaMemDao implements IPizzaDao {
 		return exist;
 	}
 
-	
-
-
-
-
 	public void updatePizza(String codePizza, Pizza pizza) {
 		Pizza pizz = findPizzaByCode(codePizza);
 		if(pizz!=null) {
-			
-			pizza = pizz;
+			pizz.setCode(pizza.getCode());
+			pizz.setDesignation(pizza.getDesignation());
+			pizz.setPrice(pizza.getPrice());
 		}
 	}
 
 	public void addPizza(Pizza pizza) {
-		Pizza[] newPizzas = new Pizza[pizzas.length + 1];
-
-		for (int i = 0; i < pizzas.length; i++) {
-			newPizzas[i] = pizzas[i];
-		}
-		newPizzas[newPizzas.length - 1] = pizza;
-		pizzas = newPizzas;
+		pizzas.add(pizza);
 	}
 
 //	public void deletePizza(String codePizza) {
@@ -74,18 +76,18 @@ public class PizzaMemDao implements IPizzaDao {
 //		pizzas = newPizzas;
 //	}
 	public void deletePizza(String codePizza) {
-		Pizza[] newPizzas = new Pizza[pizzas.length - 1];
-		
-		int indiceProvisoire = 0;
-		
-		for(int i=0;i<pizzas.length;i++) {
+		Pizza pizDeleted = findPizzaByCode(codePizza);
+		pizzas.remove(pizDeleted);
+	}
 
-			if (!pizzas[i].getCode().equals(codePizza)) {
-				newPizzas[indiceProvisoire] = pizzas[i];
-				indiceProvisoire++;
-			}
-		}
-		pizzas = newPizzas;
+	public void saveNewPizza(Pizza pizza) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean pizzaExists(String codePizza) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

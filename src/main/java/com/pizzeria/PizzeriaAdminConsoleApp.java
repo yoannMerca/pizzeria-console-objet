@@ -5,9 +5,10 @@ import java.util.Scanner;
 
 import classe.Pizza;
 import classe.Pizzeria;
+import dao.CodeUpComparator;
 import dao.PizzaMemDao;
 import dao.PriceDownComparator;
-import dao.PriceUpComparator;
+
 
 public class PizzeriaAdminConsoleApp {
 
@@ -41,16 +42,16 @@ public class PizzeriaAdminConsoleApp {
 			 */
 			case 1:
 				System.out.println("----------------------");
-				System.out.println("tri par ordre croissant tapez 1 \n\r tri par ordre decroissant tapez 2");
+				System.out.println("tri par code croissant tapez 1\n\rtri par prix ordre decroissant tapez 2");
+				scan.nextLine();
 				int choice = scan.nextInt();
 				if(choice==1) {
 					//tri par ordre croissant le prix des pizzas
-					 Collections.sort(myPizzas.findAllPizzas(), new PriceUpComparator());
-					 System.out.println(myPizzas);
+					 Collections.sort(myPizzas.findAllPizzas(), new CodeUpComparator());
+					
 				}else {
 					//tri par ordre decroissant le prix des pizzas
 					Collections.sort(myPizzas.findAllPizzas(), new PriceDownComparator());
-					 System.out.println(myPizzas);
 				}
 				System.out.println("Liste des pizzas:");
 				Pizzeria.displayAllPizza(myPizzas.findAllPizzas());
@@ -76,7 +77,9 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println("Veuillez le prix:");
 				Double price = Double.valueOf(scan.nextLine());
 				Pizza newPizza = new Pizza(code, name, price);
-				myPizzas.addPizza(newPizza);
+				
+				//System.out.println(newPizza);
+				myPizzas.saveNewPizza(newPizza);
 				System.out.println(Pizza.displayMenu());
 				break;
 			/*

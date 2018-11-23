@@ -42,13 +42,7 @@ public class PizzaMemDao implements IPizzaDao {
 		return pizz;
 	}
 
-	public boolean isPizzaExists(String codePizza) {
-		boolean exist = false;
-			if(findPizzaByCode(codePizza)!=null) {
-				exist = true;
-			}
-		return exist;
-	}
+
 
 	public void updatePizza(String codePizza, Pizza pizza) {
 		Pizza pizz = findPizzaByCode(codePizza);
@@ -59,9 +53,7 @@ public class PizzaMemDao implements IPizzaDao {
 		}
 	}
 
-	public void addPizza(Pizza pizza) {
-		pizzas.add(pizza);
-	}
+
 
 //	public void deletePizza(String codePizza) {
 //		Pizza[] newPizzas = new Pizza[pizzas.length - 1];
@@ -76,18 +68,20 @@ public class PizzaMemDao implements IPizzaDao {
 //		pizzas = newPizzas;
 //	}
 	public void deletePizza(String codePizza) {
-		Pizza pizDeleted = findPizzaByCode(codePizza);
-		pizzas.remove(pizDeleted);
+		pizzas.remove(findPizzaByCode(codePizza));
 	}
 
 	public void saveNewPizza(Pizza pizza) {
-		// TODO Auto-generated method stub
+		pizzas.add(pizza);
 		
 	}
 
 	public boolean pizzaExists(String codePizza) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean exist = false;
+		if(findPizzaByCode(codePizza)!=null) {
+			exist = true;
+		}
+	return exist;
 	}
 
 }

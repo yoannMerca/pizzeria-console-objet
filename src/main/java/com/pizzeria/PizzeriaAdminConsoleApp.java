@@ -8,6 +8,9 @@ import classe.Pizzeria;
 import dao.CodeUpComparator;
 import dao.PizzaMemDao;
 import dao.PriceDownComparator;
+import execption.DeletePizzaException;
+import execption.SavePizzaException;
+import execption.UpdatePizzaException;
 
 
 public class PizzeriaAdminConsoleApp {
@@ -60,6 +63,7 @@ public class PizzeriaAdminConsoleApp {
 			/*
 			 * 
 			 * Ajoute une nouvelle pizza
+			 * 
 			 */
 			case 2:
 				/*  Veuillez saisir le code :
@@ -78,8 +82,12 @@ public class PizzeriaAdminConsoleApp {
 				Double price = Double.valueOf(scan.nextLine());
 				Pizza newPizza = new Pizza(code, name, price);
 				
-				//System.out.println(newPizza);
-				myPizzas.saveNewPizza(newPizza);
+				try {
+					myPizzas.saveNewPizza(newPizza);
+				} catch (SavePizzaException e1) {
+					
+					System.err.println(e1);;
+				}
 				System.out.println(Pizza.displayMenu());
 				break;
 			/*
@@ -102,7 +110,12 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println("Veuillez le nouveau prix:");
 				price = Double.valueOf(scan.nextLine());
 				Pizza pizz = new Pizza(code, name, price);
-				myPizzas.updatePizza(oldCode,pizz);
+				try {
+					myPizzas.updatePizza(oldCode,pizz);
+				} catch (UpdatePizzaException e) {
+					
+					System.err.println(e);
+				}
 				System.out.println(Pizza.displayMenu());
 				break;
 			/*
@@ -117,7 +130,11 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println("Veuillez saisir le code de la pizza à modifier");
 				code = scan.nextLine();
 				
-				myPizzas.deletePizza(code);
+				try {
+					myPizzas.deletePizza(code);
+				} catch (DeletePizzaException e) {
+					System.err.println(e);
+				}
 				System.out.println(Pizza.displayMenu());
 				break;	
 			/*

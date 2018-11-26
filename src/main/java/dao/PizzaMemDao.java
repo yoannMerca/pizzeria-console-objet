@@ -6,6 +6,10 @@ import java.util.Arrays;
 
 
 import classe.Pizza;
+import execption.DeletePizzaException;
+import execption.SavePizzaException;
+import execption.StockageException;
+import execption.UpdatePizzaException;
 
 public class PizzaMemDao implements IPizzaDao {
 	Pizza pizza1 = new Pizza("PEP", "Pépéroni", 12.50);
@@ -18,7 +22,9 @@ public class PizzaMemDao implements IPizzaDao {
 	String code;
 	String name;
 	Double price;
-	
+	final int  CODE_LONG = 4;
+	final int PRICE_MAX = 20;
+	final int PRICE_MIN = 5;
 	
 	Pizza[] piz = { pizza1, pizza2, pizza3, pizza4, pizza5, pizza6, pizza7 };
 	
@@ -27,11 +33,15 @@ public class PizzaMemDao implements IPizzaDao {
 	ArrayList<Pizza> pizzas = new ArrayList<Pizza>(Arrays.asList(piz));
 	
 
-	
+	/**
+	 *  retoune un arraylist de pizza
+	 */
 	public ArrayList<Pizza> findAllPizzas() {
 		return pizzas;
 	}
-
+	/**
+	 * Methode retournerun pizza selon son code
+	 */
 	public Pizza findPizzaByCode(String codePizza) {
 		Pizza pizz = null;
 		for (Pizza pizza : pizzas) {
@@ -41,47 +51,93 @@ public class PizzaMemDao implements IPizzaDao {
 		}
 		return pizz;
 	}
-
-
-
-	public void updatePizza(String codePizza, Pizza pizza) {
+	
+	/**
+	 * Methode pour update une nouvelle pizza
+	 */
+	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
 		Pizza pizz = findPizzaByCode(codePizza);
-		if(pizz!=null) {
-			pizz.setCode(pizza.getCode());
-			pizz.setDesignation(pizza.getDesignation());
-			pizz.setPrice(pizza.getPrice());
+		try {
+			
+			if(checkMyPizza(pizza) == true && checkMyPizza(pizz) == true) {
+				pizz.setCode(pizza.getCode());
+				pizz.setDesignation(pizza.getDesignation());
+				pizz.setPrice(pizza.getPrice());
+			
+			}
+		} catch (StockageException e) {
+			
+			throw new UpdatePizzaException(e.getMessage() +" l'update n'a pas abouti ");
 		}
-	}
-
-
-
-//	public void deletePizza(String codePizza) {
-//		Pizza[] newPizzas = new Pizza[pizzas.length - 1];
-//		int i = 0;
-//		for (Pizza pizza : pizzas) {
-//
-//			if (!pizza.getCode().equals(codePizza)) {
-//				newPizzas[i] = pizza;
-//				i++;
-//			}
-//		}
-//		pizzas = newPizzas;
-//	}
-	public void deletePizza(String codePizza) {
-		pizzas.remove(findPizzaByCode(codePizza));
-	}
-
-	public void saveNewPizza(Pizza pizza) {
-		pizzas.add(pizza);
 		
 	}
 
+	/**
+	 * Methode pour delete une  pizza
+	 */
+	public void deletePizza(String codePizza) throws DeletePizzaException{	
+		try {
+			Pizza pizz = findPizzaByCode(codePizza);
+			if(checkMyPizza(pizz) == true) {
+				pizzas.remove(pizz);
+			}
+		} catch (StockageException e) {
+			throw new DeletePizzaException(e.getMessage() +" la suppression n'a pas abouti ");
+		}
+		
+	}
+	/**
+	 * Methode pour save une nouvelle pizza
+	 */
+	public void saveNewPizza(Pizza pizza) throws SavePizzaException{
+			try {
+				if(checkMyPizza(pizza) == true) {
+					pizzas.add(pizza);
+				}
+			} catch (StockageException e) {
+				throw new SavePizzaException(e.getMessage() +" l'ajout n'a pas abouti ");
+			}
+	}
+	
+	/**
+	 * Methode pour savoir si une pizza existe
+	 */
 	public boolean pizzaExists(String codePizza) {
 		boolean exist = false;
 		if(findPizzaByCode(codePizza)!=null) {
 			exist = true;
 		}
 	return exist;
+	}
+	
+	
+	/**
+	 * Methode qui verifie l'integrité de ma pizza avant le crud et nous renvoi un essage d'erreur
+	 * @param piz la pizza à vefifier
+	 * @return si ma pizza est ok pour le crud
+	 * @throws StockageException
+	 */
+	public boolean checkMyPizza(Pizza piz) throws StockageException{
+		boolean ifOk= true;
+		String message = "";
+		
+		if(piz == null) {
+			message += "la pizza n'existe pas !";
+		}else {
+			if(piz.getCode().trim().length()> CODE_LONG) {
+				message += "le code de la pizza est trop long, \n\r";
+			}if(piz.getPrice()> PRICE_MAX) {
+				message += "le prix de la pizza est trop grand, \n\r";
+			}if(piz.getPrice()< PRICE_MIN) {
+				message += "le prix de la pizza est trop grand, \n\r";
+			}
+		}
+		
+		if(message.length()>0 && message != null) {
+			ifOk = false;
+			throw  new StockageException(message);
+		}
+			return ifOk;
 	}
 
 }

@@ -4,7 +4,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+import classe.CategoriePIzzaEnum;
 import classe.Pizza;
 import execption.DeletePizzaException;
 import execption.SavePizzaException;
@@ -12,13 +12,14 @@ import execption.StockageException;
 import execption.UpdatePizzaException;
 
 public class PizzaMemDao implements IPizzaDao {
-	Pizza pizza1 = new Pizza("PEP", "Pépéroni", 12.50);
-	Pizza pizza2 = new Pizza("MAR", "Margherita", 14.00);
-	Pizza pizza3 = new Pizza("REIN", "La Reine", 11.50);
-	Pizza pizza4 = new Pizza("FRO", "La 4 fromages", 12.00);
-	Pizza pizza5 = new Pizza("CAN", "La cannibale", 12.50);
-	Pizza pizza6 = new Pizza("ORI", "L'orientale", 13.50);
-	Pizza pizza7 = new Pizza("IND", "L'indienne", 14.00);
+
+	Pizza pizza1 = new Pizza("PEP", "Pépéroni", 12.50 , CategoriePIzzaEnum.AUTRE );
+	Pizza pizza2 = new Pizza("MAR", "Margherita", 14.00,CategoriePIzzaEnum.AUTRE);
+	Pizza pizza3 = new Pizza("REIN", "La Reine", 11.50, CategoriePIzzaEnum.AUTRE);
+	Pizza pizza4 = new Pizza("FRO", "La 4 fromages", 12.00 ,CategoriePIzzaEnum.FROMAGE);
+	Pizza pizza5 = new Pizza("CAN", "La cannibale", 12.50 , CategoriePIzzaEnum.VIANDE);
+	Pizza pizza6 = new Pizza("ORI", "L'orientale", 13.50, CategoriePIzzaEnum.VIANDE);
+	Pizza pizza7 = new Pizza("IND", "L'indienne", 14.00 ,CategoriePIzzaEnum.AUTRE);
 	String code;
 	String name;
 	Double price;

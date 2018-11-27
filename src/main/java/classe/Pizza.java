@@ -11,7 +11,7 @@ package classe;
 		private String designation = null;
 		private Double price = null;
 		static int nbr =0;
-		
+		private CategoriePIzzaEnum categorie;
 		
 		/**
 		 * 
@@ -19,11 +19,12 @@ package classe;
 		 * @param designation Nom de la pizza
 		 * @param price prix de la pizza
 		 */
-		public Pizza(String code, String designation, Double price) {
+		public Pizza(String code, String designation, Double price, CategoriePIzzaEnum cat) {
 			this.idPizza = nbr++;
 			this.code = code;
 			this.designation = designation;
 			this.price = price;
+			this.categorie = cat;
 		}
 		/**
 		 * 
@@ -70,6 +71,15 @@ package classe;
 		public int getIdPizza() {
 			return idPizza;
 		}
+		
+		
+		
+		public CategoriePIzzaEnum getCategorie() {
+			return categorie;
+		}
+		public void setCategorie(CategoriePIzzaEnum cat) {
+			this.categorie = cat;
+		}
 		/**
 		 * 
 		 * @return methode pour afficher le menu de l'application
@@ -86,7 +96,7 @@ package classe;
 		
 		public String toString() {
 	
-			return this.code +" -> "+ this.designation +"("+ this.price+" €)";
+			return this.code +" -> "+ this.designation +"("+ this.price+" €) c'est une pizza de type =>"+this.categorie ;
 		}
 		/**
 		 * 

@@ -3,6 +3,7 @@ package com.pizzeria;
 import java.util.Collections;
 import java.util.Scanner;
 
+import classe.CategoriePIzzaEnum;
 import classe.Pizza;
 import classe.Pizzeria;
 import dao.CodeUpComparator;
@@ -80,13 +81,20 @@ public class PizzeriaAdminConsoleApp {
 				String name = scan.nextLine();
 				System.out.println("Veuillez le prix:");
 				Double price = Double.valueOf(scan.nextLine());
-				Pizza newPizza = new Pizza(code, name, price);
+				System.out.println("Veuillez saisir la categorie"
+						+ "° tapez 1 pour Frommage \r\n"
+						+ "° 2 pour Viande \r\n\""
+						+ "° 3 pour Poisson \r\n\""
+						+ "° 4 pour Autre \r\n\"");
+				int categorie = scan.nextInt();
+				CategoriePIzzaEnum cat = CategoriePIzzaEnum.getEnum(categorie);
+				Pizza newPizza = new Pizza(code, name, price, cat);
 				
 				try {
 					myPizzas.saveNewPizza(newPizza);
-				} catch (SavePizzaException e1) {
+				} catch (SavePizzaException e) {
 					
-					System.err.println(e1);;
+					System.err.println(e);
 				}
 				System.out.println(Pizza.displayMenu());
 				break;
@@ -109,13 +117,21 @@ public class PizzeriaAdminConsoleApp {
 				name = scan.nextLine();
 				System.out.println("Veuillez le nouveau prix:");
 				price = Double.valueOf(scan.nextLine());
-				Pizza pizz = new Pizza(code, name, price);
+				System.out.println("Veuillez saisir la categorie"
+						+ "° tapez 1 pour Frommage \r\n"
+						+ "° 2 pour Viande \r\n\""
+						+ "° 3 pour Poisson \r\n\""
+						+ "° 4 pour Autre \r\n\"");
+				int catego = scan.nextInt();
+				CategoriePIzzaEnum cate = CategoriePIzzaEnum.getEnum(catego);
+				Pizza pizz = new Pizza(code, name, price, cate);
 				try {
 					myPizzas.updatePizza(oldCode,pizz);
 				} catch (UpdatePizzaException e) {
-					
+				
 					System.err.println(e);
 				}
+			
 				System.out.println(Pizza.displayMenu());
 				break;
 			/*

@@ -64,7 +64,7 @@ public class PizzaMemDao implements IPizzaDao {
 				pizz.setCode(pizza.getCode());
 				pizz.setDesignation(pizza.getDesignation());
 				pizz.setPrice(pizza.getPrice());
-			
+				pizz.setCategorie(pizza.getCategorie());
 			}
 		} catch (StockageException e) {
 			

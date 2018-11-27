@@ -81,11 +81,12 @@ public class PizzeriaAdminConsoleApp {
 				String name = scan.nextLine();
 				System.out.println("Veuillez le prix:");
 				Double price = Double.valueOf(scan.nextLine());
-				System.out.println("Veuillez saisir la categorie"
+				System.out.println("Veuillez saisir la categorie \n\r"
 						+ "° tapez 1 pour Frommage \r\n"
-						+ "° 2 pour Viande \r\n\""
-						+ "° 3 pour Poisson \r\n\""
+						+ "° 2 pour Viande \r\n"
+						+ "° 3 pour Poisson \r\n"
 						+ "° 4 pour Autre \r\n\"");
+				
 				int categorie = scan.nextInt();
 				CategoriePIzzaEnum cat = CategoriePIzzaEnum.getEnum(categorie);
 				Pizza newPizza = new Pizza(code, name, price, cat);
@@ -117,10 +118,10 @@ public class PizzeriaAdminConsoleApp {
 				name = scan.nextLine();
 				System.out.println("Veuillez le nouveau prix:");
 				price = Double.valueOf(scan.nextLine());
-				System.out.println("Veuillez saisir la categorie"
+				System.out.println("Veuillez saisir la categorie \n\r"
 						+ "° tapez 1 pour Frommage \r\n"
-						+ "° 2 pour Viande \r\n\""
-						+ "° 3 pour Poisson \r\n\""
+						+ "° 2 pour Viande \r\n"
+						+ "° 3 pour Poisson \r\n"
 						+ "° 4 pour Autre \r\n\"");
 				int catego = scan.nextInt();
 				CategoriePIzzaEnum cate = CategoriePIzzaEnum.getEnum(catego);
